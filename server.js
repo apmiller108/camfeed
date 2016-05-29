@@ -37,9 +37,10 @@ const video = spawn('raspivid', [
     '-'
 ]);
 
-video.stdio[0].pipe(ffmpeg);
+// video.stdio[0].pipe(ffmpeg);
 video.stdout.on('data', (data) => {
-  console.log(data);
+  // console.log(data);
+  ffmpeg.stdin.write(data);
 });
 
 // video.stdout.pipe(ffmpeg.stdin);
