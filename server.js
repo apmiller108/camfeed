@@ -8,10 +8,8 @@ const ffmpeg = spawn('ffmpeg', [
     '-f',
     'mpeg1video',
     '-b',
-    '800k',
-    '-r',
-    '25',
-    'http://192.168.1.192:8082/password/640/480/'
+    '400k',
+    'http://192.168.1.192:8082/password/340/240/'
 ]);
 
 const video = spawn('raspivid', [
@@ -26,32 +24,32 @@ const video = spawn('raspivid', [
     '-ex',
     'night',
     '-w',
-    '640',
+    '320',
     '-h',
-    '480',
+    '240',
     '-fps', 
-    '25', 
+    '35', 
     '-b',
-    '8000000',
+    '4000000',
     '-o',
     '-'
 ]);
 
-// video.stdio[0].pipe(ffmpeg);
 video.stdout.on('data', (data) => {
-  // console.log(data);
   ffmpeg.stdin.write(data);
 });
 
-// video.stdout.pipe(ffmpeg.stdin);
+video.stderr.on('error', (error) => {
+  console.log(error);
+  return true;
+});
 
-video.stderr.on('err', (err) => {
-  console.log(err);
+ffmpeg.stderr.on('error', (error) => {
+  console.log(error);
 });
 
 function initialize() {
   console.log(`raspivid started with PID: ${video.pid}`);
-  // console.log(`ffmpeg started with PID: ${ffmpeg.pid}`);
 }
 
 initialize();
