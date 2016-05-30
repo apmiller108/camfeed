@@ -9,7 +9,7 @@ const ffmpeg = spawn('ffmpeg', [
     'mpeg1video',
     '-b',
     '400k',
-    'http://192.168.1.192:8082/password/340/240/'
+    'http://192.168.1.192:8082/password/320/240/'
 ]);
 
 const raspivid = spawn('raspivid', [
@@ -28,7 +28,7 @@ const raspivid = spawn('raspivid', [
     '-h',
     '240',
     '-fps', 
-    '35', 
+    '30', 
     '-b',
     '4000000',
     '-o',
