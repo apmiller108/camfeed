@@ -39,7 +39,7 @@ let feed = {
 
   raspivid: raspivid,
   ffmpeg: ffmpeg,
-  initialize: () => {
+  start: () => {
 
     feed.raspivid.stdout.on('data', (data) => {
       feed.ffmpeg.stdin.write(data);
@@ -53,6 +53,10 @@ let feed = {
     feed.ffmpeg.stderr.on('error', (error) => {
       console.log(error);
     });
+  },
+  stop: () => {
+    feed.raspivid.kill();
+    feed.ffmpeg.kill();
   }
 };
 
