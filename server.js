@@ -15,8 +15,18 @@ socket.on('connect', () => {
   socket.on('room', (data) =>{
     console.log(data);
   });
+  
+  socket.on('start feed', (data) => {
+    if(data) {
+      feed.start();
+    }
+  });
+
+  socket.on('stop feed', (data) => {
+    if(data) {
+      feed.stop();
+    }
+  });
 });
 
 initialize();
-
-// feed.initialize();
